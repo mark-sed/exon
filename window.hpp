@@ -3,12 +3,13 @@
 
 #include <string>
 #include <SFML/Graphics.hpp>
+#include "config.hpp"
 
 namespace exon {
 
 class Window {
 public:
-    Window(unsigned int width, unsigned int height, const std::string& title);
+    Window(conf::WindowConf &wcnf);
     ~Window();
 
     void update();

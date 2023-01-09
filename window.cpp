@@ -2,8 +2,8 @@
 
 using namespace exon;
 
-Window::Window(unsigned int width, unsigned int height, const std::string& title) {
-    this->window = new sf::RenderWindow(sf::VideoMode(width, height), title);
+Window::Window(conf::WindowConf &wcnf) {
+    this->window = new sf::RenderWindow(sf::VideoMode(wcnf.width, wcnf.height), wcnf.title);
 }
 
 Window::~Window() {
