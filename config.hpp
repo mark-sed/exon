@@ -15,7 +15,7 @@ namespace exon {
 
         struct Conf {
             WindowConf window_conf;  
-            
+            double fps = 60.0;
         };
 
     }

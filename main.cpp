@@ -5,11 +5,11 @@
 #include <iostream>
 
 void update() {
-
+    
 }
 
 void render(sf::RenderWindow *window) {
-    
+
 }
 
 int main(int argc, char *argv[]) {
@@ -26,6 +26,7 @@ int main(int argc, char *argv[]) {
     engine->run(&update, &render);
 
     delete engine;
+    delete cnf;
     
     return 0;
 }
