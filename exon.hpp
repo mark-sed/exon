@@ -28,12 +28,12 @@ namespace exon {
 
         void run(std::function<void()> fupdate, std::function<void(sf::RenderWindow*)> frender);
 
-        int get_ticks() { return this->ticks; }
-        int get_frames() { return this->frames; }
+        int get_ticks() { return this->gticks; }
+        int get_frames() { return this->fps; }
     private:
         conf::Conf *cnf;
-        int ticks;
-        int frames;
+        int fps;
+        int gticks;
         
         void update();
     };

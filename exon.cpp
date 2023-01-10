@@ -20,6 +20,8 @@ void Exon::run(std::function<void()> fupdate, std::function<void(sf::RenderWindo
     double ns = 1000000 / this->cnf->fps;
     double delta = 0;
     sf::Clock clock;
+    int ticks;
+    int frames;
     
     auto lastTime = clock.getElapsedTime().asMicroseconds();
     
@@ -34,17 +36,19 @@ void Exon::run(std::function<void()> fupdate, std::function<void(sf::RenderWindo
         if(delta >= 1){
             update();
             fupdate();
-            ticks++;
+            frames++;
             delta--;
         }
         
-        window->window->clear();
+        window->window->clear(sf::Color::Black);
         frender(this->window->window);
         window->window->display();
-        frames++;
+        ticks++;
         
         if(timer >= 1000000){
             //std::cout << ticks << "   " << frames << "\n";
+            this->fps = frames;
+            this->gticks = ticks;
             ticks = 0;
             frames = 0;
             timer = 0;

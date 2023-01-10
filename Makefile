@@ -1,9 +1,10 @@
-FILES=main.cpp exon.cpp window.cpp logging.cpp
+FILES=main.cpp exon.cpp window.cpp logging.cpp gfx.cpp
+FLAGS=-Wall
 
 all: build clean
 
 build:
-	g++ -c $(FILES)
+	g++ $(FLAGS) -c $(FILES)
 	g++ *.o -o main -lsfml-graphics -lsfml-window -lsfml-system
 
 clean:

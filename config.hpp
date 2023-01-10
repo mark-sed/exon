@@ -13,10 +13,16 @@ namespace exon {
             unsigned int height;
         };
 
+        struct SpriteConf {
+            float scale = 1.0;
+        };
+
         struct Conf {
-            WindowConf window_conf;  
+            WindowConf window_conf;
+            SpriteConf sprite_conf;
             double fps = 60.0;
         };
+
 
     }
 }
