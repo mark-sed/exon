@@ -4,6 +4,7 @@
 #include "exon.hpp"
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
 
 namespace exon {
 
@@ -18,6 +19,16 @@ namespace exon {
         unsigned int height;
         sf::Texture sheet;
         conf::SpriteConf cnf;
+    };
+
+
+    class Animation {
+    public:
+        Animation(std::string path, std::string name);
+        ~Animation();
+
+        void update();
+        void reset();
     };
 
 

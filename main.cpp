@@ -44,7 +44,7 @@ public:
         window->draw(img);
 
         sf::Font dorFont01;
-        dorFont01.loadFromFile("DorFont01.ttf");
+        dorFont01.loadFromFile("res/DorFont01.ttf");
 
         sf::Text tfps;
         tfps.setFont(dorFont01);
@@ -53,6 +53,9 @@ public:
         tfps.setFillColor(sf::Color::White);
         tfps.setPosition(cnf->window_conf.width-tfps.getLocalBounds().width-5, 0);
         window->draw(tfps);
+
+        exon::Animation anim("res/anim.json", "joker");
+        
     }
 };
 
