@@ -10,6 +10,33 @@
 using namespace exon;
 using json = nlohmann::json;
 
+Fonts::Fonts() {
+
+}
+
+Fonts &Fonts::get() {
+    static Fonts instance;
+    return instance;
+}
+
+std::unordered_map<std::string, sf::Font> Fonts::font_lib = {};
+std::string Fonts::basepath = "";
+
+sf::Font Fonts::get_font(std::string name) {
+    auto inst = Fonts::get();
+    if(Fonts::font_lib.find(name) == Fonts::font_lib.end()) {
+        sf::Font f;
+        if(!f.loadFromFile(inst.basepath+name)) {
+            // TODO: Return default font
+            error("Could not load font '"+name+"'");
+        }
+        Fonts::font_lib[name] = f;
+        LOG1("Loaded font "+name+".");
+        return f;
+    }
+    return Fonts::font_lib[name];
+}
+
 SpriteSheet::SpriteSheet(std::string path, 
                          unsigned int width,
                          unsigned int height,
@@ -18,7 +45,7 @@ SpriteSheet::SpriteSheet(std::string path,
                                                   height{height},
                                                   cnf{cnf} {
     if(!this->sheet.loadFromFile(cnf.basepath+path)){
-        error(std::string("Could not load file '")+path+"'.");
+        error(std::string("Could not load file '")+path+"'");
     }
 }
 
@@ -77,14 +104,16 @@ Animation::Animation(std::string path,
 
     curr_img = ss->get_sprite(cols[0], rows[0], widths[0], heights[0]);
     last_time = clock.getElapsedTime();
+    LOG1("Loaded animation '"+name+"' ['"+key+"'].");
 }
 
 Animation::~Animation() {
-
+    delete ss;
 }
 
 void Animation::reset() {
-
+    this->index = 0;
+    last_time = clock.getElapsedTime();
 }
 
 void Animation::update() {

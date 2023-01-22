@@ -24,6 +24,8 @@ public:
         cnf->sprite_conf.basepath = "res/";
         cnf->sprite_conf.scale = 4.f;
 
+        exon::Fonts::get().set_basepath("res/");
+        
         engine = new exon::Exon(cnf);
 
         anim = new exon::Animation("res/anim.json", "joker", "idle", cnf->sprite_conf);
@@ -50,8 +52,7 @@ public:
 
         anim->render(window, 200, 200);
 
-        sf::Font dorFont01;
-        dorFont01.loadFromFile("res/DorFont01.ttf");
+        sf::Font dorFont01 = exon::Fonts::get_font("DorFont01.ttf");
         sf::Text tfps;
         tfps.setFont(dorFont01);
         tfps.setString(std::to_string(engine->get_frames())+std::string("/")+std::to_string(engine->get_ticks()));

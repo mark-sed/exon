@@ -8,10 +8,23 @@
 #include <SFML/System/Time.hpp>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using json = nlohmann::json;
 
 namespace exon {
+
+    class Fonts {
+    public:
+        Fonts();
+        static Fonts &get();
+
+        static sf::Font get_font(std::string name);
+
+        void set_basepath(std::string bp) { basepath = bp; }
+        static std::unordered_map<std::string, sf::Font> font_lib;
+        static std::string basepath;
+    };
 
     class SpriteSheet {
     public:
