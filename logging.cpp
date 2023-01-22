@@ -1,6 +1,15 @@
 #include "logging.hpp"
 #include <iostream>
 
+void error(const std::string msg, int code) {
+    std::cerr << "Error: " << msg << std::endl;
+    exit(code);
+}
+
+void warning(const std::string msg) {
+    std::cerr << "Warning: " << msg << std::endl;
+}
+
 BaseLogger::BaseLogger() : disable(false), log_everything(false), logging_level{0} {
 
 }

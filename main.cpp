@@ -13,15 +13,20 @@ class Game {
 public:
     exon::conf::Conf *cnf;
     exon::Exon *engine;
+    exon::Animation *anim;
 
     Game() {
         cnf = new exon::conf::Conf();
         cnf->window_conf.width = 900;
         cnf->window_conf.height = 600;
         cnf->window_conf.title = "Game window";
+
+        cnf->sprite_conf.basepath = "res/";
         cnf->sprite_conf.scale = 4.f;
+
         engine = new exon::Exon(cnf);
-        
+
+        anim = new exon::Animation("res/anim.json", "joker", "idle", cnf->sprite_conf);
     }
 
     ~Game() {
@@ -34,18 +39,19 @@ public:
     }
 
     void update() {
-    
+        anim->update();
     }
 
     void render(sf::RenderWindow *window) {
-        exon::SpriteSheet ss("icons.png", 16, 16, cnf->sprite_conf);
-        auto img = ss.get_sprite(0, 0);
-        img.setPosition(200, 200);
-        window->draw(img);
+        //exon::SpriteSheet ss("icons.png", 16, 16, cnf->sprite_conf);
+        //auto img = ss.get_sprite(0, 0);
+        //img.setPosition(200, 200);
+        //window->draw(img);
+
+        anim->render(window, 200, 200);
 
         sf::Font dorFont01;
         dorFont01.loadFromFile("res/DorFont01.ttf");
-
         sf::Text tfps;
         tfps.setFont(dorFont01);
         tfps.setString(std::to_string(engine->get_frames())+std::string("/")+std::to_string(engine->get_ticks()));
@@ -53,9 +59,6 @@ public:
         tfps.setFillColor(sf::Color::White);
         tfps.setPosition(cnf->window_conf.width-tfps.getLocalBounds().width-5, 0);
         window->draw(tfps);
-
-        exon::Animation anim("res/anim.json", "joker");
-        
     }
 };
 

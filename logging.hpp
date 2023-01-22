@@ -7,6 +7,10 @@
 #include <ostream>
 #include <set>
 #include <cstring>
+#include <SFML/Graphics.hpp>
+
+void error(const std::string msg, int code=1);
+void warning(const std::string msg);
 
 /**
  * Base class for all loggers

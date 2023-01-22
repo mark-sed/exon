@@ -14,6 +14,7 @@ namespace exon {
         };
 
         struct SpriteConf {
+            std::string basepath;
             float scale = 1.0;
         };
 

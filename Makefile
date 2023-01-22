@@ -1,5 +1,5 @@
 FILES=main.cpp exon.cpp window.cpp logging.cpp gfx.cpp
-FLAGS=-Wall
+FLAGS=-Wall -std=c++17
 PATHS=libs/curlpp/include
 
 all: build clean
