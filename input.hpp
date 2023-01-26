@@ -102,12 +102,12 @@ namespace exon {
             {"RSB", 10},
         };
         const std::map<std::string, unsigned int> JOYAXES {
-            {"LSBX", 0},
-            {"LSBY", 1},
+            {"LSX", 0},
+            {"LSY", 1},
             {"LT", 2},
             {"RT", 3},
-            {"RSBX", 4},
-            {"RSBY", 5},
+            {"RSX", 4},
+            {"RSY", 5},
             {"DPADX", 6},
             {"DPADY", 7},
         };

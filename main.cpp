@@ -47,8 +47,8 @@ public:
     void update() {
         anim->update();
 
-        y += 2 * (exon::input::get_axis_move(0, exon::input::JOYAXES.at("LSBY")) / 100.f);
-        x += 2 * (exon::input::get_axis_move(0, exon::input::JOYAXES.at("LSBX")) / 100.f);
+        y += 2 * (exon::input::get_axis_move(0, exon::input::JOYAXES.at("LSY")) / 100.f);
+        x += 2 * (exon::input::get_axis_move(0, exon::input::JOYAXES.at("LSX")) / 100.f);
 
         if(exon::input::is_key_pressed(sf::Keyboard::Key::W)) {
             y -= 2;
