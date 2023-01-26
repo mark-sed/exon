@@ -1,4 +1,4 @@
-FILES=main.cpp exon.cpp window.cpp logging.cpp gfx.cpp
+FILES=main.cpp exon.cpp window.cpp logging.cpp gfx.cpp input.cpp
 FLAGS=-Wall -std=c++17
 PATHS=libs/curlpp/include
 

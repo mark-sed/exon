@@ -1,4 +1,6 @@
 #include "window.hpp"
+#include "input.hpp"
+#include <iostream>
 
 using namespace exon;
 
@@ -17,5 +19,10 @@ void Window::update() {
         if(event.type == sf::Event::Closed) {
             window->close();
         }
+        exon::input::update_input(event);
+        /*if (event.type == sf::Event::TextEntered) {
+            if (event.text.unicode < 128)
+                std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+        }*/
     }
 }

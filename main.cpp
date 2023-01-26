@@ -2,6 +2,7 @@
 #include "config.hpp"
 #include "logging.hpp"
 #include "gfx.hpp"
+#include "input.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
@@ -14,6 +15,7 @@ public:
     exon::conf::Conf *cnf;
     exon::Exon *engine;
     exon::Animation *anim;
+    int x, y;
 
     Game() {
         cnf = new exon::conf::Conf();
@@ -28,7 +30,9 @@ public:
         
         engine = new exon::Exon(cnf);
 
-        anim = new exon::Animation("res/anim.json", "joker", "idle", cnf->sprite_conf);
+        anim = new exon::Animation("anim.json", "joker", "idle", cnf->sprite_conf);
+
+        x = y = 200;
     }
 
     ~Game() {
@@ -42,15 +46,23 @@ public:
 
     void update() {
         anim->update();
+
+        if(exon::input::is_key_pressed(sf::Keyboard::Key::W)) {
+            y -= 2;
+        }
+        else if(exon::input::is_key_pressed(sf::Keyboard::Key::S)) {
+            y += 2;
+        }
+        if(exon::input::is_key_pressed(sf::Keyboard::Key::A)) {
+            x -= 2;
+        }
+        else if(exon::input::is_key_pressed(sf::Keyboard::Key::D)) {
+            x += 2;
+        }
     }
 
     void render(sf::RenderWindow *window) {
-        //exon::SpriteSheet ss("icons.png", 16, 16, cnf->sprite_conf);
-        //auto img = ss.get_sprite(0, 0);
-        //img.setPosition(200, 200);
-        //window->draw(img);
-
-        anim->render(window, 200, 200);
+        anim->render(window, x, y);
 
         sf::Font dorFont01 = exon::Fonts::get_font("DorFont01.ttf");
         sf::Text tfps;

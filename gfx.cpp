@@ -69,14 +69,25 @@ Animation::Animation(std::string path,
                      const std::string name,
                      const std::string key,
                      conf::SpriteConf &cnf) : name{name}, key{key}, cnf{cnf} {
-    std::ifstream f(path);
-    std::string conf((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
-    try{
-        json_data = json::parse(conf);
-    }catch(json::exception &e){
-        // Error loading animation file, abort!
-        std::string m = std::string("Animation '")+name+std::string("' (")+path+std::string(") could not be parsed.");
-        error(m);
+    if(!cnf.load_from_sting) {
+        std::ifstream f(cnf.basepath+path);
+        std::string conf((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
+        try{
+            json_data = json::parse(conf);
+        }catch(json::exception &e){
+            // Error loading animation file, abort!
+            std::string m = std::string("Animation '")+name+std::string("' (")+path+std::string(") could not be parsed.");
+            error(m);
+        }
+    }
+    else {
+        try{
+            json_data = json::parse(path);
+        }catch(json::exception &e){
+            // Error loading animation file, abort!
+            std::string m = std::string("Animation '")+name+std::string("' could not be parsed.");
+            error(m);
+        }
     }
     auto an_json = json_data[name][key];
     ss = new SpriteSheet(an_json["sprite"].get<std::string>(), 
