@@ -47,6 +47,9 @@ public:
     void update() {
         anim->update();
 
+        y += 2 * (exon::input::get_axis_move(0, exon::input::JOYAXES.at("LSBY")) / 100.f);
+        x += 2 * (exon::input::get_axis_move(0, exon::input::JOYAXES.at("LSBX")) / 100.f);
+
         if(exon::input::is_key_pressed(sf::Keyboard::Key::W)) {
             y -= 2;
         }
@@ -58,6 +61,15 @@ public:
         }
         else if(exon::input::is_key_pressed(sf::Keyboard::Key::D)) {
             x += 2;
+        }
+
+        if(exon::input::is_joy_changed()) {
+            if(exon::input::get_joy_connected(0)) {
+                std::cout << "CONNECTED!\n";
+            }
+            else if(exon::input::get_joy_disconnected(0)){
+                std::cout << "DISCONNECTED!\n";
+            }
         }
     }
 

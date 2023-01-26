@@ -13,17 +13,35 @@ namespace exon {
 
         extern std::array<bool, sf::Keyboard::Key::KeyCount> keypressed;
         extern sf::Keyboard::Key keyreleased;
+
         extern std::array<bool, sf::Mouse::Button::ButtonCount> mousepressed;
         extern sf::Mouse::Button mousereleased;
         extern int mousescroll;
         extern int hmousescroll;
         extern bool mousemoved;
 
+        extern std::array<std::array<bool, sf::Joystick::ButtonCount>, sf::Joystick::Count> joypressed;
+        extern std::array<std::array<int, sf::Joystick::AxisCount>, sf::Joystick::Count> joymoved;
+        extern std::array<unsigned int, sf::Joystick::Count> joyreleased;
+        extern std::array<bool, sf::Joystick::Count> joyconnected;
+        extern std::array<bool, sf::Joystick::Count> joydisconnected;
+        extern bool joychanged;
+
+        void init_input();
         void update_input(sf::Event event);
         
         bool is_key_pressed(sf::Keyboard::Key k);
         bool is_key_released(sf::Keyboard::Key k);
         bool is_key_clicked(sf::Keyboard::Key k);
+
+        bool is_joy_pressed(unsigned id, unsigned b);
+        bool is_joy_released(unsigned id, unsigned b);
+        bool is_joy_clicked(unsigned id, unsigned b);
+        int get_axis_move(unsigned id, unsigned b);
+        inline bool is_joy_connected(unsigned id);
+        bool get_joy_connected(unsigned id);
+        bool get_joy_disconnected(unsigned id);
+        bool is_joy_changed();
 
         bool is_mouse_pressed(sf::Mouse::Button b);
         bool is_mouse_released(sf::Mouse::Button b);
@@ -69,6 +87,30 @@ namespace exon {
             {"B2", sf::Mouse::Button::XButton2},
         };
         
+        // XBOX
+        const std::map<std::string, unsigned int> JOYCODES {
+            {"A", 0},
+            {"B", 1},
+            {"X", 2},
+            {"Y", 3},
+            {"LB", 4},
+            {"RB", 5},
+            {"VIEW", 6},
+            {"MENU", 7},
+            {"GUIDE", 8},
+            {"LSB", 9},
+            {"RSB", 10},
+        };
+        const std::map<std::string, unsigned int> JOYAXES {
+            {"LSBX", 0},
+            {"LSBY", 1},
+            {"LT", 2},
+            {"RT", 3},
+            {"RSBX", 4},
+            {"RSBY", 5},
+            {"DPADX", 6},
+            {"DPADY", 7},
+        };
     }
 }
 
