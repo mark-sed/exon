@@ -11,6 +11,27 @@
 namespace exon {
     namespace input {
 
+        extern std::array<bool, sf::Keyboard::Key::KeyCount> keypressed;
+        extern sf::Keyboard::Key keyreleased;
+        extern std::array<bool, sf::Mouse::Button::ButtonCount> mousepressed;
+        extern sf::Mouse::Button mousereleased;
+        extern int mousescroll;
+        extern int hmousescroll;
+        extern bool mousemoved;
+
+        void update_input(sf::Event event);
+        
+        bool is_key_pressed(sf::Keyboard::Key k);
+        bool is_key_released(sf::Keyboard::Key k);
+        bool is_key_clicked(sf::Keyboard::Key k);
+
+        bool is_mouse_pressed(sf::Mouse::Button b);
+        bool is_mouse_released(sf::Mouse::Button b);
+        bool is_mouse_clicked(sf::Mouse::Button b);
+        int get_scroll();
+        int get_hscroll();
+        bool is_mouse_in_window();
+
         const std::map<std::string, sf::Keyboard::Key> KEYCODES {
             {"A", sf::Keyboard::Key::A},
             {"B", sf::Keyboard::Key::B},
@@ -40,13 +61,14 @@ namespace exon {
             {"Z", sf::Keyboard::Key::Z},
         };
 
-        extern std::array<bool, sf::Keyboard::Key::KeyCount> keypressed;
-        extern sf::Keyboard::Key keyreleased;
-
-        void update_input(sf::Event event);
-        bool is_key_pressed(sf::Keyboard::Key k);
-        bool is_key_released(sf::Keyboard::Key k);
-        bool is_key_clicked(sf::Keyboard::Key k);
+        const std::map<std::string, sf::Mouse::Button> MOUSECODE {
+            {"LEFT", sf::Mouse::Button::Left},
+            {"RIGHT", sf::Mouse::Button::Right},
+            {"MIDDLE", sf::Mouse::Button::Middle},
+            {"B1", sf::Mouse::Button::XButton1},
+            {"B2", sf::Mouse::Button::XButton2},
+        };
+        
     }
 }
 
