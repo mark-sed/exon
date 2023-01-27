@@ -11,7 +11,7 @@ using namespace exon;
 Exon::Exon(conf::Conf *cnf) : cnf{cnf} {
     LOGMAX("Exon " EXON_VERSION " started.");
     this->window = new Window(cnf->window_conf);
-    exon::input::init_input();
+    exon::input::init_input(this->window->window);
 }
 
 Exon::~Exon() {

@@ -2,6 +2,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Joystick.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 using namespace exon::input;
@@ -23,7 +24,10 @@ std::array<bool, sf::Joystick::Count> exon::input::joyconnected{false, };
 std::array<bool, sf::Joystick::Count> exon::input::joydisconnected{false, };
 bool exon::input::joychanged = false;
 
-void exon::input::init_input() {
+static sf::RenderWindow *curr_window;
+
+void exon::input::init_input(sf::RenderWindow *window) {
+    curr_window = window;
     for(unsigned i = 0; i < sf::Joystick::Count; ++i) {
         if(is_joy_connected(i)) {
             joychanged = true;
@@ -128,6 +132,30 @@ int exon::input::get_hscroll() {
 
 bool exon::input::is_mouse_in_window() {
     return exon::input::mousemoved;
+}
+
+int exon::input::get_mouse_x() {
+    return sf::Mouse::getPosition(*curr_window).x;
+}
+
+int exon::input::get_mouse_y() {
+    return sf::Mouse::getPosition(*curr_window).y;
+}
+
+sf::Vector2i exon::input::get_mouse_xy() {
+    return sf::Mouse::getPosition(*curr_window);
+}
+
+int exon::input::get_mouse_desktop_x() {
+    return sf::Mouse::getPosition().x;
+}
+
+int exon::input::get_mouse_desktop_y() {
+    return sf::Mouse::getPosition().y;
+}
+
+sf::Vector2i exon::input::get_mouse_desktop_xy() {
+    return sf::Mouse::getPosition();
 }
 
 bool exon::input::is_joy_pressed(unsigned id, unsigned b) {

@@ -5,6 +5,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Joystick.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics.hpp>
 #include <map>
 #include <array>
 
@@ -27,7 +28,7 @@ namespace exon {
         extern std::array<bool, sf::Joystick::Count> joydisconnected;
         extern bool joychanged;
 
-        void init_input();
+        void init_input(sf::RenderWindow *window);
         void update_input(sf::Event event);
         
         bool is_key_pressed(sf::Keyboard::Key k);
@@ -49,6 +50,12 @@ namespace exon {
         int get_scroll();
         int get_hscroll();
         bool is_mouse_in_window();
+        int get_mouse_x();
+        int get_mouse_y();
+        sf::Vector2i get_mouse_xy();
+        int get_mouse_desktop_x();
+        int get_mouse_desktop_y();
+        sf::Vector2i get_mouse_desktop_xy();
 
         const std::map<std::string, sf::Keyboard::Key> KEYCODES {
             {"A", sf::Keyboard::Key::A},
